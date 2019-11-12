@@ -34,14 +34,14 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/zinobeprueba/', '../index.php');
-$map->get('addUser', '/zinobeprueba/addUser', '../addUser.php');
+$map->get('index', '/', '../index.php');
+$map->get('addUser', '/addUser', '../addUser.php');
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
 
 if (!$route) {
-    echo 'PAGO 404';
+    echo 'PAGE 404';
 } else {
     require $route->handler;
 }
