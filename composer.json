@@ -1,0 +1,9 @@
+{
+  "name": "Zinobeprueba",
+  "description": "Prueba Tecnica de Miguel Camargo para Zinobe",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
