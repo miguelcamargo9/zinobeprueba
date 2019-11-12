@@ -1,5 +1,5 @@
 {
-  "name": "Zinobeprueba",
+  "name": "zinobeprueba",
   "description": "Prueba Tecnica de Miguel Camargo para Zinobe",
   "autoload": {
     "psr-4": {
@@ -7,6 +7,8 @@
     }
   },
   "require": {
-    "illuminate/database": "^6.5"
+    "illuminate/database": "^6.5",
+    "zendframework/zend-diactoros": "^2.1",
+    "aura/router": "^3.1"
   }
 }
