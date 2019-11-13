@@ -34,8 +34,18 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/', '../index.php');
-$map->get('addUser', '/addUser', '../addUser.php');
+$map->get('index', '/', [
+    'controller' => 'App\Controllers\IndexController',
+    'action' => 'indexAction'
+]);
+$map->get('addUser', '/user/add', [
+    'controller' => 'App\Controllers\UserController',
+    'action' => 'getAddUserAction'
+]);
+$map->post('saveUser', '/user/add', [
+    'controller' => 'App\Controllers\UserController',
+    'action' => 'saveAddUserAction'
+]);
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
@@ -43,7 +53,12 @@ $route = $matcher->match($request);
 if (!$route) {
     echo 'PAGE 404';
 } else {
-    require $route->handler;
+    $handlerData = $route->handler;
+    $actionName = $handlerData['action'];
+    $controllerName = $handlerData['controller'];
+    $controller = new $controllerName;
+    $response = $controller->$actionName($request);
+    echo $response->getBody();
 }
 
 
