@@ -1,0 +1,26 @@
+{% extends "layout.twig"%} {% block content %}
+<form>
+  <div class="form-group">
+    <label for="inputEmail">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="inputEmail"
+      id="inputEmail"
+      aria-describedby="emailHelp"
+      placeholder="Enter email"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input
+      type="password"
+      name="inputPassword"
+      class="form-control"
+      id="inputPassword"
+      placeholder="Password"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
