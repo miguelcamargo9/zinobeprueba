@@ -1,0 +1,22 @@
+{% extends "layout.twig"%} {% block content %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Document</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.ID }}</th>
+      <td>{{ user.name }}</td>
+      <td>{{ user.document }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
