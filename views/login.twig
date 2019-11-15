@@ -1,5 +1,12 @@
 {% extends "layout.twig"%} {% block content %}
-<form>
+
+<h5 class="card-title">Login</h5>
+
+<div class="alert alert-primary" role="alert">
+  {{ responseMessage }}
+</div>
+
+<form action="/auth" method="POST">
   <div class="form-group">
     <label for="inputEmail">Email</label>
     <input
@@ -9,6 +16,7 @@
       id="inputEmail"
       aria-describedby="emailHelp"
       placeholder="Enter email"
+      required
     />
   </div>
   <div class="form-group">
@@ -19,6 +27,7 @@
       class="form-control"
       id="inputPassword"
       placeholder="Password"
+      required
     />
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
