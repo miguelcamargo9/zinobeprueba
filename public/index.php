@@ -21,10 +21,7 @@ $capsule->addConnection([
     'prefix'    => '',
 ]);
 
-// Make this Capsule instance available globally via static methods... (optional)
 $capsule->setAsGlobal();
-
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
@@ -59,7 +56,7 @@ $map->get('loginForm', '/login', [
 ]);
 $map->get('logoutForm', '/logout', [
     'controller' => 'App\Controllers\AuthController',
-    'action' => 'getLogut',
+    'action' => 'getLogout',
     'auth' => true
 ]);
 $map->post('auth', '/auth', [
