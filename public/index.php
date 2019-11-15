@@ -4,6 +4,9 @@ require '../vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
+use Zend\Diactoros\Response\RedirectResponse;
+
+session_start();
 
 $capsule = new Capsule;
 
@@ -36,15 +39,33 @@ $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 $map->get('index', '/', [
     'controller' => 'App\Controllers\IndexController',
-    'action' => 'indexAction'
+    'action' => 'indexAction',
+    'auth' => true
 ]);
 $map->get('addUser', '/user/add', [
     'controller' => 'App\Controllers\UserController',
-    'action' => 'getAddUserAction'
+    'action' => 'getAddUserAction',
+    'auth' => true
 ]);
 $map->post('saveUser', '/user/add', [
     'controller' => 'App\Controllers\UserController',
-    'action' => 'saveAddUserAction'
+    'action' => 'saveAddUserAction',
+    'auth' => true
+]);
+$map->get('loginForm', '/login', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogin',
+    'auth' => false
+]);
+$map->get('logoutForm', '/logout', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogut',
+    'auth' => true
+]);
+$map->post('auth', '/auth', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'postLogin',
+    'auth' => false
 ]);
 
 $matcher = $routerContainer->getMatcher();
@@ -56,8 +77,21 @@ if (!$route) {
     $handlerData = $route->handler;
     $actionName = $handlerData['action'];
     $controllerName = $handlerData['controller'];
-    $controller = new $controllerName;
-    $response = $controller->$actionName($request);
+    $needsAuth = $handlerData['auth'];
+    $sessionuserId = $_SESSION['userID'] ?? null;
+    if ($needsAuth && !$sessionuserId) {
+        $response = new RedirectResponse('/login');
+    } else {
+        $controller = new $controllerName;
+        $response = $controller->$actionName($request);
+    }
+
+    foreach ($response->getHeaders() as $headerName => $headerValues) {
+        foreach ($headerValues as $headerValue) {
+            header(sprintf('%s: %s', $headerName, $headerValue));
+        }
+    }
+    http_response_code($response->getStatusCode());
     echo $response->getBody();
 }
 
