@@ -11,6 +11,8 @@ session_start();
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/..');
 $dotenv->load();
 
+$container = new DI\Container();
+
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -82,7 +84,7 @@ if (!$route) {
     if ($needsAuth && !$sessionuserId) {
         $response = new RedirectResponse('/login');
     } else {
-        $controller = new $controllerName;
+        $controller = $container->get($controllerName);
         $response = $controller->$actionName($request);
     }
 

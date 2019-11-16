@@ -15,6 +15,8 @@
     "psr/http-client": "^1.0",
     "guzzlehttp/guzzle": "^6.4",
     "php-http/guzzle6-adapter": "^2.0",
-    "vlucas/phpdotenv": "^3.6"
+    "vlucas/phpdotenv": "^3.6",
+    "php-di/php-di": "^6.0",
+    "woohoolabs/harmony": "^6.1"
   }
 }
