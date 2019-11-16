@@ -19,7 +19,7 @@ class AuthController extends BaseController
         $user = User::where('email', $postData['inputEmail'])->first();
         if ($user) {
             if (password_verify($postData['inputPassword'], $user->password)) {
-                $_SESSION['userID'] = $user->ID;
+                $_SESSION['userId'] = $user->id;
                 return new RedirectResponse('/');
             } else {
                 $responseMessage = "Login Incorrecto";
@@ -33,7 +33,7 @@ class AuthController extends BaseController
 
     public function getLogout()
     {
-        unset($_SESSION['userID']);
+        unset($_SESSION['userId']);
         return new RedirectResponse('/login');
     }
 }

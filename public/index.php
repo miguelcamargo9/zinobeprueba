@@ -47,12 +47,12 @@ $map->get('index', '/', [
 $map->get('addUser', '/user/add', [
     'controller' => 'App\Controllers\UserController',
     'action' => 'getAddUserAction',
-    'auth' => true
+    'auth' => false
 ]);
 $map->post('saveUser', '/user/add', [
     'controller' => 'App\Controllers\UserController',
     'action' => 'saveAddUserAction',
-    'auth' => true
+    'auth' => false
 ]);
 $map->get('loginForm', '/login', [
     'controller' => 'App\Controllers\AuthController',
@@ -80,7 +80,7 @@ if (!$route) {
     $actionName = $handlerData['action'];
     $controllerName = $handlerData['controller'];
     $needsAuth = $handlerData['auth'];
-    $sessionuserId = $_SESSION['userID'] ?? null;
+    $sessionuserId = $_SESSION['userId'] ?? null;
     if ($needsAuth && !$sessionuserId) {
         $response = new RedirectResponse('/login');
     } else {

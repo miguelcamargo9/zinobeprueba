@@ -1,9 +1,12 @@
 {% extends "layout.twig"%} {% block content %}
-<div class="container justify-content-end">
+
+<div class="container">
   <a href="/logout">
     <button type="button" class="btn btn-secondary btn-sm">logout</button>
   </a>
 </div>
+<br />
+<h5 class="card-title">List of Users</h5>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -17,7 +20,7 @@
   <tbody>
     {% for user in users %}
     <tr>
-      <th scope="row">{{ user.ID }}</th>
+      <th scope="row">{{ user.id }}</th>
       <td>{{ user.name }}</td>
       <td>{{ user.document }}</td>
       <td>{{ user.country }}</td>

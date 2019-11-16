@@ -2,9 +2,11 @@
 
 <h5 class="card-title">Login</h5>
 
+{% if responseMessage %}
 <div class="alert alert-primary" role="alert">
   {{ responseMessage }}
 </div>
+{% endif %}
 
 <form action="/auth" method="POST">
   <div class="form-group">
@@ -30,6 +32,11 @@
       required
     />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Login</button>
 </form>
+<br />
+<div class="form-group">
+  <a href="/user/add"><button class="btn btn-success">Sign in</button></a>
+</div>
+
 {% endblock %}

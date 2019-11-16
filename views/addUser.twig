@@ -2,9 +2,11 @@
 
 <h5 class="card-title">Create User</h5>
 
+{% if responseMessage %}
 <div class="alert alert-primary" role="alert">
   {{ responseMessage }}
 </div>
+{% endif %}
 
 <form action="/user/add" method="POST">
   <div class="form-group">
@@ -61,4 +63,8 @@
   </div>
   <button type="submit" class="btn btn-primary">Save User</button>
 </form>
+<br />
+<div class="form-group">
+  <a href="/login"><button class="btn btn-info">Login</button></a>
+</div>
 {% endblock %}
