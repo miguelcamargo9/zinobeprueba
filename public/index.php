@@ -8,11 +8,14 @@ use Zend\Diactoros\Response\RedirectResponse;
 
 session_start();
 
+//manage ENV vars 
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/..');
 $dotenv->load();
 
+//Container of dependency injection
 $container = new DI\Container();
 
+//Eloquen capsule
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -29,6 +32,7 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+//PSR 7 Messages with Diactoros
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
     $_GET,
@@ -37,6 +41,7 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 
+//Route container with Aurora
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 $map->get('index', '/', [
@@ -68,6 +73,16 @@ $map->post('auth', '/auth', [
     'controller' => 'App\Controllers\AuthController',
     'action' => 'postLogin',
     'auth' => false
+]);
+$map->get('loaddir1', '/loaddir1', [
+    'controller' => 'App\Controllers\DirectoryController',
+    'action' => 'getLoadDir1',
+    'auth' => true
+]);
+$map->get('loaddir2', '/loaddir2', [
+    'controller' => 'App\Controllers\DirectoryController',
+    'action' => 'getLoadDir2',
+    'auth' => true
 ]);
 
 $matcher = $routerContainer->getMatcher();
