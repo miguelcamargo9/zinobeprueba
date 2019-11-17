@@ -32,4 +32,9 @@ class DirectoryService
 
         return Directory::all();
     }
+
+    public function search($search)
+    {
+        return Directory::where('email',  $search)->orWhere('name', $search)->get() ?? [];
+    }
 }

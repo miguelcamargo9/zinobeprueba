@@ -1,22 +1,47 @@
 {% extends "layout.twig"%} {% block content %}
 
 <div class="container">
-  <a href="/logout">
-    <button type="button" class="btn btn-secondary btn-sm">logout</button>
-  </a>
-  <a href="/loaddir1">
-    <button type="button" class="btn btn-sm btn-warning">
-      load directory 1
-    </button>
-  </a>
-  <a href="/loaddir2">
-    <button type="button" class="btn btn-sm btn-dark">
-      load directory 2
-    </button>
-  </a>
+  <div class="row">
+    <div class="col">
+      <a href="/logout">
+        <button type="button" class="btn btn-secondary btn-sm">Logout</button>
+      </a>
+      <a href="/loaddir1">
+        <button type="button" class="btn btn-sm btn-warning">
+          Load Directory 1
+        </button>
+      </a>
+      <a href="/loaddir2">
+        <button type="button" class="btn btn-sm btn-dark">
+          Load Directory 2
+        </button>
+      </a>
+    </div>
+    <diV class="col">
+      <form class="form-inline" action="/search" method="POST">
+        <div class="form-group mx-sm-3 mb-2">
+          <input
+            type="text"
+            class="form-control"
+            name="inputSearch"
+            id="inputSearch"
+            placeholder="Name or Email"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">
+          Search
+        </button>
+      </form>
+    </diV>
+  </div>
 </div>
 <br />
 <h5 class="card-title">Directory</h5>
+{% if responseMessage %}
+<div class="alert alert-primary" role="alert">
+  {{ responseMessage }}
+</div>
+{% endif %}
 <table class="table">
   <thead class="thead-dark">
     <tr>

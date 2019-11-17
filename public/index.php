@@ -84,6 +84,11 @@ $map->get('loaddir2', '/loaddir2', [
     'action' => 'getLoadDir2',
     'auth' => true
 ]);
+$map->post('search', '/search', [
+    'controller' => 'App\Controllers\DirectoryController',
+    'action' => 'search',
+    'auth' => true
+]);
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
