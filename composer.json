@@ -19,5 +19,10 @@
     "php-di/php-di": "^6.0",
     "woohoolabs/harmony": "^6.1",
     "robmorgan/phinx": "^0.11.1"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "vendor/bin/phinx migrate"
+    ]
   }
 }
