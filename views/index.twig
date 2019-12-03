@@ -1,0 +1,42 @@
+{% extends "layout.twig"%} {% block content %}
+
+<div class="container">
+  <a href="/logout">
+    <button type="button" class="btn btn-secondary btn-sm">Logout</button>
+  </a>
+  <a href="/loaddir1">
+    <button type="button" class="btn btn-sm btn-warning">
+      Load Directory 1
+    </button>
+  </a>
+  <a href="/loaddir2">
+    <button type="button" class="btn btn-sm btn-dark">
+      Load Directory 2
+    </button>
+  </a>
+</div>
+<br />
+<h5 class="card-title">List of Users</h5>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Document</th>
+      <th scope="col">Country</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.name }}</td>
+      <td>{{ user.document }}</td>
+      <td>{{ user.country }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

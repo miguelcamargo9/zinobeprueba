@@ -1,0 +1,42 @@
+{% extends "layout.twig"%} {% block content %}
+
+<h5 class="card-title">Login</h5>
+
+{% if responseMessage %}
+<div class="alert alert-primary" role="alert">
+  {{ responseMessage }}
+</div>
+{% endif %}
+
+<form action="/auth" method="POST">
+  <div class="form-group">
+    <label for="inputEmail">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="inputEmail"
+      id="inputEmail"
+      aria-describedby="emailHelp"
+      placeholder="Enter email"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input
+      type="password"
+      name="inputPassword"
+      class="form-control"
+      id="inputPassword"
+      placeholder="Password"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<br />
+<div class="form-group">
+  <a href="/user/add"><button class="btn btn-success">Sign in</button></a>
+</div>
+
+{% endblock %}
